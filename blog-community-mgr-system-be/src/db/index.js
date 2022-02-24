@@ -1,5 +1,6 @@
 require('./Schemas/User');
 require('./Schemas/InviteCode');
+require('./Schemas/Blog');
 
 const mongoose = require('mongoose');
 
