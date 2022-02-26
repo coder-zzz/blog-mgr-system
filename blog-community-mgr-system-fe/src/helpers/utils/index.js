@@ -1,5 +1,6 @@
 import { message } from "ant-design-vue"
 
+// promise的封装
 export const result = (response,authShowErrorMsg = true) => {
   const {data} = response;
 
@@ -30,11 +31,14 @@ export const result = (response,authShowErrorMsg = true) => {
   }
 }
 
+// 深拷贝封装
 export const deepClone = (obj) => {
   return JSON.parse(JSON.stringify(obj))
 }
 
+// 时间戳转换
 export const formatTimeStamp = (ts) => {
+  // 补零
   const formatNumber =(n) => {
     n = n.toString()
     return n[1] ? n : '0' + n

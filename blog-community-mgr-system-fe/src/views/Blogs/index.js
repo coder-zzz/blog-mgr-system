@@ -1,4 +1,5 @@
 import { defineComponent,ref,onMounted} from "vue";
+import { useRouter } from "vue-router";
 import { blog } from "../../services";
 import { result,formatTimeStamp} from "../../helpers/utils";
 import AddOne from "./AddOne/index.vue";
@@ -11,6 +12,8 @@ export default defineComponent ({
     Update,
   },
   setup(){
+    const router = useRouter();
+
     const columns = [
       {
         title:'博客标题',
@@ -115,13 +118,20 @@ export default defineComponent ({
       getList();
     }
 
+    // 显示修改模态框
     const update = (({record}) => {
       showUpdateModal.value = true;
       curEditBlog.value = record;
     })
 
+    // 显示列表的某一行数据
     const updateCurBlog = (newData) => {
       Object.assign(curEditBlog.value,newData);
+    }
+
+    // 进入博客详情页
+    const toDetail = ({record}) => {
+      router.push(`/blogs/${record._id}`);
     }
 
     return{
@@ -141,6 +151,7 @@ export default defineComponent ({
       update,
       curEditBlog,
       updateCurBlog,
+      toDetail,
     }
   }
 })

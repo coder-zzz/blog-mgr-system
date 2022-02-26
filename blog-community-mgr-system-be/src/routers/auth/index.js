@@ -44,7 +44,7 @@ router.post('/register',async (ctx) =>{
     code:inviteCode
   }).exec();
 
-  //通过查询结果判断邀请码是否正确
+  // 通过查询结果判断邀请码是否正确
   if(!findCode){
     ctx.body = {
       code:0,

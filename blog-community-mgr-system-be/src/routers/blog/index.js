@@ -39,6 +39,7 @@ router.post('/add',async (ctx) =>{
   };
 })
 
+// 获取博客列表
 router.get('/list',async (ctx) =>{
   const {
     page = 1,
@@ -77,6 +78,7 @@ router.get('/list',async (ctx) =>{
   };
 })
 
+// 删除博客
 router.delete('/:id', async (ctx) => {
   const {
     id
@@ -93,6 +95,7 @@ router.delete('/:id', async (ctx) => {
   }
 })
 
+// 修改博客
 router.post('/update',async (ctx) => {
   const {
     id,
@@ -134,6 +137,34 @@ router.post('/update',async (ctx) => {
     data:res,
   }  
 })
+
+// 获取某个特定的博客信息
+router.get('/detail/:id',async (ctx) => {
+  const {
+    id
+  } = ctx.params;
+
+  const one = await Blog.findOne({
+    _id:id,
+  }).exec();
+
+  if(!one){
+    ctx.body = {
+      code:0,
+      msg:'没有找到博客',
+    }
+
+    return
+  }
+
+  ctx.body = {
+    code:1,
+    msg:'查询博客成功',
+    data:one,
+  }
+})
+
+
 
 //导出路由
 module.exports = router;

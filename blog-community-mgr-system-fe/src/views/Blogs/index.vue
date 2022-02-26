@@ -16,11 +16,13 @@
 
       <a-divider></a-divider>
 
-      <a-table :columns="columns" :dataSource="list" :pagination="false">
+      <a-table :columns="columns" :dataSource="list" :pagination="false" bordered>
         <template #publishDate="data">
           {{formatTimeStamp(data.record.publishDate)}}
         </template>
         <template #actions="record">
+          <a href="javascript:;" @click="toDetail(record)">详情</a>
+          &nbsp;
           <a href="javascript:;" @click="update(record)">修改</a>
           &nbsp;
           <a href="javascript:;" @click="remove(record)">删除</a>
@@ -29,7 +31,7 @@
 
       <space-between>
         <div></div>
-        <a-pagination class="pagination" v-model:current="curPage" :total="total" :page-size="5" @change="setPage"></a-pagination>
+        <a-pagination v-if="!isSearch" class="pagination" v-model:current="curPage" :total="total" :page-size="5" @change="setPage"></a-pagination>
       </space-between>
     </a-card>
 
