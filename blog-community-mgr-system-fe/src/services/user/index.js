@@ -19,11 +19,12 @@ export const remove = (id) => {
 }
 
 // 添加用户接口
-export const add = (account,password) => {
+export const add = (account,password,character) => {
   return axios.post('http://localhost:3000/user/add',
   {
     account,
     password,
+    character,
   })
 }
 
@@ -32,4 +33,17 @@ export const resetPassword = (id) => {
   return axios.post('http://localhost:3000/user/reset/password',{
     id,
   })
+}
+
+// 修改用户角色接口
+export const editCharacter = (characterID,userId) => {
+  return axios.post('http://localhost:3000/user/update/character',{
+    character:characterID,
+    userId,
+  })
+}
+
+// 获取用户信息
+export const info = () => {
+  return axios.get('http://localhost:3000/user/info')
 }

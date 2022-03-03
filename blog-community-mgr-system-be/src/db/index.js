@@ -1,6 +1,10 @@
 require('./Schemas/User');
 require('./Schemas/InviteCode');
 require('./Schemas/Blog');
+require('./Schemas/Character');
+require('./Schemas/Log');
+require('./Schemas/LogResponse');
+require('./Schemas/BlogClassify');
 
 const mongoose = require('mongoose');
 

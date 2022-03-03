@@ -1,8 +1,11 @@
 const Router = require('@koa/router');
 const mongoose = require('mongoose');
 const config = require('../../project.config');
+const {getRequestBody} = require('../../helpers/utils/index.js')
+const {verify,getToken} = require('../../helpers/token');
 
 const User = mongoose.model('User');
+const Character = mongoose.model('Character');
 
 // 设置路由前缀
 const router = new Router({
@@ -67,11 +70,37 @@ router.post('/add',async (ctx) => {
   const {
     account,
     password,
+    character,
   } = getRequestBody(ctx);
+
+  const char = await Character.findOne({
+    _id:character,
+  }).exec();
+
+  if(!char){
+    ctx.body = {
+      code:0,
+      msg:'该角色不存在',
+    }
+    return
+  }
+
+  const one = await User.findOne({
+    account,
+  }).exec();
+
+  if(one){
+    ctx.body = {
+      code:0,
+      msg:'用户已存在',
+    }
+    return
+  }
 
   const user = new User({
     account,
     password:password || '123456',
+    character,
   })
 
   const res = await user.save();
@@ -83,6 +112,7 @@ router.post('/add',async (ctx) => {
   }
 })
 
+//重置密码
 router.post('/reset/password',async (ctx) => {
   const {
     id,
@@ -111,6 +141,56 @@ router.post('/reset/password',async (ctx) => {
       account:res.account,
       _id:res._id,
     },
+  }
+})
+
+// 修改用户角色
+router.post('/update/character',async (ctx) => {
+  const {
+    character,
+    userId,
+  } = getRequestBody(ctx);
+
+  const char = await Character.findOne({
+    _id:character,
+  }).exec();
+
+  if(!char){
+    ctx.body = {
+      code:0,
+      msg:'该角色不存在',
+    }
+    return
+  }
+
+  const user = await User.findOne({
+    _id:userId,
+  }).exec();
+
+  if(!user){
+    ctx.body = {
+      code:0,
+      msg:'该用户不存在',
+    }
+    return
+  }
+
+  user.character = character;
+  const res = await user.save();
+
+  ctx.body = {
+    code:1,
+    msg:'修改角色成功',
+    data:res,
+  }
+})
+
+//获取token，方便通过token获取用户信息
+router.get('/info',async (ctx) => {
+  ctx.body = {
+    code:1,
+    msg:'获取成功',
+    data:await verify(getToken(ctx)),
   }
 })
 

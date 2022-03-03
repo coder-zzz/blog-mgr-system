@@ -20,7 +20,15 @@
             <a-date-picker v-model:value="addForm.publishDate"/>
         </a-form-item>
         <a-form-item label="分类">
-          <a-input v-model:value="addForm.classfiy" />
+          <a-select v-model:value="addForm.classfiy">
+            <a-select-option
+              v-for="item in store.blogClassify"
+              :key="item._id"
+              :value="item.title"
+            >
+              {{item.title}}
+            </a-select-option>
+          </a-select>
         </a-form-item>
       </a-form>
     </a-modal>

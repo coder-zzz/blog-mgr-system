@@ -8,18 +8,17 @@
     background-image: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
     background-repeat: no-repeat;
     background-position: center center;
-    background-size: cover
+    background-size: cover;
   }
   .title-info{
+    margin-top: 50px;
     text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     .logo{
-      text-align: none;
-      height: 60px;
-      width: 60px;
+      margin: 20px auto;
+      height: 150px;
+      width: 150px;
       img{
+        display: block;
         height: 100%;
         width: 100%;
       }

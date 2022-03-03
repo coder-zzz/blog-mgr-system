@@ -3,6 +3,7 @@ import { message } from "ant-design-vue";
 import { blog } from "../../../services";
 import { result,deepClone} from "../../../helpers/utils";
 import moment from 'moment';
+import store from "../../../store";
 
 export default defineComponent({
   props:{
@@ -51,6 +52,7 @@ export default defineComponent({
       close,
       editForm,
       submit,
+      store:store.state,
     }
   }
 })

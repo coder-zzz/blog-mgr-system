@@ -1,6 +1,6 @@
 import { defineComponent,ref,onMounted} from "vue";
 import { useRouter } from "vue-router";
-import { blog } from "../../services";
+import { blog, blogClassify } from "../../services";
 import { result,formatTimeStamp} from "../../helpers/utils";
 import AddOne from "./AddOne/index.vue";
 import Update from "./Update/index.vue";
@@ -50,6 +50,9 @@ export default defineComponent ({
     const keyword = ref('');
     const isSearch = ref(false);
     const curEditBlog = ref({});
+
+    // 添加loading防止在博客列表渲染完就进行分类的操作
+    const classifyLoading = ref(false);
 
     // 获取博客列表
     const getList = async () => {
@@ -152,6 +155,8 @@ export default defineComponent ({
       curEditBlog,
       updateCurBlog,
       toDetail,
+      classifyLoading,
+      getList,
     }
   }
 })

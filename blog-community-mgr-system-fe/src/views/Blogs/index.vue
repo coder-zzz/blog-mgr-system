@@ -11,7 +11,7 @@
           <a v-if="isSearch" class="back" href="javascript:;" @click="backAll">返回</a>
         </div>
 
-        <a-button @click="show = true">添加一条</a-button>
+        <a-button @click="show = true" :loading="classifyLoading">添加一条</a-button>
       </space-between>
 
       <a-divider></a-divider>
@@ -35,7 +35,7 @@
       </space-between>
     </a-card>
 
-    <add-one v-model:show="show"></add-one>
+    <add-one v-model:show="show" @getList="getList"></add-one>
     <update v-model:show="showUpdateModal" :blog="curEditBlog" @update="updateCurBlog"></update>
   </div>
 </template>

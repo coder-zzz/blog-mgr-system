@@ -2,6 +2,7 @@ import { defineComponent,reactive} from "vue";
 import { message } from "ant-design-vue";
 import { blog } from "../../../services";
 import { result,deepClone} from "../../../helpers/utils";
+import store from "../../../store";
 
 const defaultFormData = {
   title:'',
@@ -19,6 +20,10 @@ export default defineComponent({
         deepClone(defaultFormData)
     )
 
+    if(store.state.blogClassify.length){
+      addForm.classfiy = store.state.blogClassify[0].title;
+    }
+
     const submit = async () => {
       const form = deepClone(addForm);
       form.publishDate = addForm.publishDate.valueOf();
@@ -28,6 +33,11 @@ export default defineComponent({
       .success((d,{data}) => {
         Object.assign(addForm,defaultFormData);
         message.success(data.msg);
+
+        // 调用父组件传递过来的函数
+        context.emit('getList');
+        
+        close();
       })
     }
 
@@ -40,6 +50,7 @@ export default defineComponent({
       submit,
       props,
       close,
+      store:store.state,
     }
   }
 })

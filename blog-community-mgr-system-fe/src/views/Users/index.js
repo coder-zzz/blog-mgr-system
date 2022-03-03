@@ -1,8 +1,11 @@
-import { defineComponent,ref,onMounted} from "vue";
+import { defineComponent,ref,onMounted,reactive} from "vue";
 import { user } from "../../services";
 import {result,formatTimeStamp} from '@/helpers/utils';
 import { message } from "ant-design-vue";
 import AddOne from "./AddOne/index.vue";
+import {getCharacterInfoById} from '@/helpers/character/index.js';
+import {FormOutlined} from '@ant-design/icons-vue';
+import store from '@/store';
 
 // 用户列表表格行信息
 const columns = [
@@ -17,6 +20,12 @@ const columns = [
       },
     },
     {
+      title:'角色',
+      slots:{
+        customRender:'character',
+      },
+    },
+    {
       title:'操作',
       slots:{
         customRender:'actions',
@@ -28,6 +37,8 @@ export default defineComponent({
   components:{
     // 引入添加用户组件
     AddOne,
+    //引入icon图标组件
+    FormOutlined,
   },
 
   setup(){
@@ -38,6 +49,14 @@ export default defineComponent({
     const keyword = ref('');
     const isSearch = ref(false);
 
+    const showEditCharacterModal = ref(false);
+    const editForm = reactive({
+      character:'',
+      current:{},
+    })
+
+
+    const {characterInfo} = store.state;
     // 获取用户列表
     const getUser = async () => {
       const res = await user.list(curPage.value,5,keyword.value);
@@ -97,6 +116,22 @@ export default defineComponent({
       getUser();
     }
 
+    const onEdit = (record) => {
+      editForm.current = record;
+      editForm.character = record.character;
+      showEditCharacterModal.value = true;
+    }
+
+    const updateCharacter = async () => {
+      const res = await user.editCharacter(editForm.character,editForm.current._id);
+
+      result(res)
+        .success(({msg}) => {
+          message.success(msg);
+          showEditCharacterModal.value = false;
+          editForm.current.character = editForm.character;
+        })
+    }
 
     return{
       list,
@@ -113,6 +148,12 @@ export default defineComponent({
       onSearch,
       backAll,
       isSearch,
+      getCharacterInfoById,
+      showEditCharacterModal,
+      editForm,
+      characterInfo,
+      onEdit,
+      updateCharacter,
     }
   }
 })

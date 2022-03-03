@@ -3,6 +3,11 @@ import {UserOutlined,LockOutlined,GiftOutlined} from '@ant-design/icons-vue';
 import {auth} from '@/services';
 import { result } from '../../helpers/utils';
 import {message} from 'ant-design-vue'
+import store from '../../store';
+import { user } from '../../services';
+import {getCharacterInfoById} from '@/helpers/character/index.js';
+import { useRouter } from 'vue-router';
+import { setToken } from '../../helpers/token';
 
 export default defineComponent({
   components:{
@@ -11,6 +16,8 @@ export default defineComponent({
     GiftOutlined
   },
   setup(){
+    const router = useRouter();
+
     message.config({
       top: `200px`,
       duration: 1,
@@ -77,8 +84,16 @@ export default defineComponent({
       const res = await auth.login(loginForm.account,loginForm.password);
 
       result(res)
-      .success((data) => {
-        message.success(data.msg);
+      .success(({msg,data:{user,token}}) => {
+        message.success(msg);
+
+        store.commit('setUserInfo',user);
+        store.commit('setUserCharacter',getCharacterInfoById(user.character));
+
+        setToken(token);
+
+        //刷新页面后vuex中的数据就被销毁了，此时需要通过token来重新获取用户信息
+        router.replace('/blogs')
       })
     }
 

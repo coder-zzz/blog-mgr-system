@@ -1,7 +1,7 @@
 <template>
   <div class="auth">
     <div class="bg"></div>
-    <div class="titie-info">
+    <div class="title-info">
       <div class="logo">
         <img src="../../assets/img/logo.png" alt="">
       </div>

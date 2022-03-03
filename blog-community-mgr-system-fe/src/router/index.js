@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router';
+import store from '../store';
 
 const routes = [
   {
@@ -26,6 +27,21 @@ const routes = [
         name:'Users',
         component: () => import(/* webpackChunkName: "Users" */ '../views/Users/index.vue'),
       },
+      {
+        path:'/logs',
+        name:'Log',
+        component: () => import(/* webpackChunkName: "Log" */ '../views/Log/index.vue'),
+      },
+      {
+        path:'/invite-code',
+        name:'InviteCode',
+        component: () => import(/* webpackChunkName: "InviteCode" */ '../views/InviteCode/index.vue'),
+      },
+      {
+        path:'/blogClassify',
+        name:'BlogClassify',
+        component: () => import(/* webpackChunkName: "BlogClassify" */ '../views/BlogClassify/index.vue'),
+      },
     ]
   },
 ];
@@ -33,6 +49,25 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+router.beforeEach(async (to,from,next) => {
+  // const reqArr = [];
+
+  if(!store.state.characterInfo.length){
+    await store.dispatch('getCharacterInfo');
+  }
+
+  if(!store.state.userInfo.account){
+    await store.dispatch('getUserInfo');
+  }
+
+    await store.dispatch('getBlogClassify');
+
+
+  // await Promise.all(reqArr);
+
+  next();
 });
 
 export default router;

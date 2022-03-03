@@ -3,6 +3,8 @@ const koaBody = require('koa-body');
 const {connect} = require('./db')
 const registerRoutes = require('./routers');
 const cors = require('@koa/cors');
+const {middleware:koaJwtMiddleware,catchTokenError} = require('./helpers/token');
+const {logMiddleware} = require('./helpers/log');
 
 const app = new Koa();
 
@@ -11,6 +13,15 @@ connect().then(() => {
     // 全局注册中间件
     app.use(koaBody());
     app.use(cors());
+
+    // 捕获token错误
+    app.use(catchTokenError);
+    
+    // jwt验证中间件
+    koaJwtMiddleware(app);
+
+    // 日志中间件
+    app.use(logMiddleware);
 
     //触发路由
     registerRoutes(app);

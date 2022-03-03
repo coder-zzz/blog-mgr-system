@@ -2,6 +2,7 @@ const Router = require('@koa/router');
 const mongoose = require('mongoose');
 const {getRequestBody} = require('../../helpers/utils')
 const jwt = require('jsonwebtoken');
+const config = require('../../project.config')
 
 //获取User表中的model文档中的内容
 const User = mongoose.model('User');
@@ -119,6 +120,7 @@ router.post('/login',async (ctx) =>{
 // 作jwt第一个参数使用
 const user = {
   account:one.account,
+  character:one.character,
   _id:one._id,
 }
 
@@ -129,7 +131,7 @@ const user = {
       msg:"登录成功",
       data:{
         user,
-        token:jwt.sign(user,"blog-mgr")
+        token:jwt.sign(user,config.JWT_SECRET),
       },
     };
 

@@ -1,0 +1,32 @@
+export default [
+  {
+    title:'博客管理',
+    url:'/blogs',
+    onlySuperAdmin:false,
+  },
+  {
+    title:'用户管理',
+    url:'/users',
+    onlySuperAdmin:true,
+  },
+  {
+    title:'操作日志',
+    url:'/logs',
+    onlySuperAdmin:false,
+  },
+  {
+    title:'杂项',
+    children:[
+      {
+        title:'博客分类',
+        url:'/blogClassify',
+        onlySuperAdmin:false,
+      },
+      {
+        title:'邀请码列表',
+        url:'/invite-code',
+        onlySuperAdmin:true,
+      },
+    ]
+  },
+]

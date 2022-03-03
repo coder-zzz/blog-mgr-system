@@ -59,6 +59,9 @@ router.get('/list',async (ctx) =>{
 
   const list = await Blog
   .find(query)
+  .sort({
+    _id:-1,
+  })
   .skip((page - 1) * size)
   .limit(size)
   .exec();
