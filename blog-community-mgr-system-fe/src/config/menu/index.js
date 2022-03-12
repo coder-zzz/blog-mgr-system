@@ -5,6 +5,11 @@ export default [
     onlySuperAdmin:false,
   },
   {
+    title:'发布博客',
+    url:'/publishBlog',
+    onlySuperAdmin:false,
+  },
+  {
     title:'用户管理',
     url:'/users',
     onlySuperAdmin:true,
@@ -27,6 +32,12 @@ export default [
         url:'/invite-code',
         onlySuperAdmin:true,
       },
-    ]
+    ],
+    onlySuperAdmin:false,
+  },
+  {
+    title:'修改密码',
+    url:'/profile',
+    onlySuperAdmin:false,
   },
 ]

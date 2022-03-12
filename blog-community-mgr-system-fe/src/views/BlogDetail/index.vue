@@ -31,9 +31,29 @@
     </a-card>
 
     <div class="blog-content">
-      <a-card title="博客内容">博客内容</a-card>
+      <a-card>
+        <space-between>
+          <h3>博客内容</h3>
+          <div>
+            <a-button size="samll" type="primary" @click="editContent">编辑</a-button>
+          </div>
+        </space-between>
+        <a-divider></a-divider>
+        <mavon-editor
+          class="mavon-editor"
+          v-model="detailInfo.content"
+          :subfield="subfield"
+          :defaultOpen="defaultOpen"
+          :toolbarsFlag="toolbarsFlag"
+          :editable="editable"
+          :scrollStyle="true"
+        >
+       </mavon-editor>
+       <div class="save">
+         <a-button size="samll" type="primary" @click="save" v-show="subfield">保存</a-button>
+       </div>
+      </a-card>
     </div>
-
     <update v-model:show="showUpdateModal" :blog="detailInfo" @update="update"></update>
   </div>
 </template>

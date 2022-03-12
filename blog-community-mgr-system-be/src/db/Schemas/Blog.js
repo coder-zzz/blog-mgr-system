@@ -10,6 +10,8 @@ const BlogSchema = new mongoose.Schema({
   publishDate:String, 
   // 分类
   classfiy:String,
+  //博客内容
+  content:String,
 
   meta:getMeta(),
 })

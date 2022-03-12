@@ -1,7 +1,8 @@
 import { defineComponent,ref,onMounted} from "vue";
 import {inviteCode} from '@/services'
-import {result} from '@/helpers/utils';
+import {result,isAction} from '@/helpers/utils';
 import { message } from "ant-design-vue";
+import store from "../../store";
 
 export default defineComponent({
   setup(){
@@ -14,12 +15,6 @@ export default defineComponent({
         title:'使用状态',
         slots:{
           customRender:'status',
-        },
-      },
-      {
-        title:'操作',
-        slots:{
-          customRender:'actions',
         },
       },
     ];
@@ -41,7 +36,8 @@ export default defineComponent({
         })
     }
 
-    onMounted(() => {
+    onMounted(async () => {
+      await isAction(columns);
       getInviiteCodeList();
     })
 

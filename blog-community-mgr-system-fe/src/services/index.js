@@ -5,3 +5,4 @@ export * as character from './character';
 export * as log from './log';
 export * as inviteCode from './inviteCode';
 export * as blogClassify from './blogClassify';
+export * as profile from './profile';

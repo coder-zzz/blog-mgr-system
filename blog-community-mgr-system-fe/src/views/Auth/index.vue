@@ -19,16 +19,16 @@
             </a-input>
           </div>
           <div class="item">
-            <a-input v-model:value="loginForm.password" size="large" placeholder="密码">
+            <a-input-password v-model:value="loginForm.password" size="large" placeholder="密码">
               <template #prefix>
                 <LockOutlined />
               </template>
-            </a-input>
+            </a-input-password>
           </div>
 
-          <div class="item forget">
+          <!-- <div class="item forget">
             <a href="">忘记密码</a>
-          </div>
+          </div> -->
 
           <div class="item">
             <a-button @click="login" size="large" type="primary">登录</a-button>
@@ -43,14 +43,14 @@
             </a-input>
           </div>
           <div class="item">
-            <a-input v-model:value="regForm.password" size="large" placeholder="密码">
+            <a-input-password v-model:value="regForm.password" size="large" placeholder="密码">
               <template #prefix>
                 <LockOutlined />
               </template>
-            </a-input>
+            </a-input-password>
           </div>
           <div class="item">
-            <a-input v-model:value="regForm.inviteCode" size="large" placeholder="邀请码(选填)">
+            <a-input v-model:value="regForm.inviteCode" size="large" placeholder="邀请码">
               <template #prefix>
                 <GiftOutlined />
               </template>

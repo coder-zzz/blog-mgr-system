@@ -23,6 +23,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "BlogDetail" */ '../views/BlogDetail/index.vue'),
       },
       {
+        path:'/publishBlog',
+        name:'PublishBlog',
+        component: () => import(/* webpackChunkName: "PublishBlog" */ '../views/PublishBlog/index.vue'),
+      },
+      {
         path:'/users',
         name:'Users',
         component: () => import(/* webpackChunkName: "Users" */ '../views/Users/index.vue'),
@@ -41,6 +46,11 @@ const routes = [
         path:'/blogClassify',
         name:'BlogClassify',
         component: () => import(/* webpackChunkName: "BlogClassify" */ '../views/BlogClassify/index.vue'),
+      },
+      {
+        path:'/profile',
+        name:'Profile',
+        component: () => import(/* webpackChunkName: "Profile" */ '../views/Profile/index.vue'),
       },
     ]
   },

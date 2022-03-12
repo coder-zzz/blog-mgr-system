@@ -7,11 +7,18 @@
       mode="inline"
       v-for="(item,index) in menu"
       :key="index.url"
+      v-only-superAdmin="item.onlySuperAdmin"
     >
-      <a-sub-menu v-if="item.children">
+      <a-sub-menu v-if="item.children" :key="item.title">
         <template #title>{{item.title}}</template>
         <a-menu-item-group style="background-color:white">
-          <a-menu-item @click="to(children.url)" :key="children.url" v-for="children in item.children">{{children.title}}</a-menu-item>
+          <a-menu-item
+            v-for="children in item.children"
+            :key="children.url"
+            @click="to(children.url)"
+          >
+            {{children.title}}
+          </a-menu-item>
         </a-menu-item-group>
       </a-sub-menu>
       <a-menu-item @click="to(item.url)" :key="item.url" v-else>{{item.title}}</a-menu-item>

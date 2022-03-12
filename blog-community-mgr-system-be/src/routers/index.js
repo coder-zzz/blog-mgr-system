@@ -5,6 +5,7 @@ const user = require('./user');
 const character = require('./character');
 const log = require('./log');
 const blogClassify = require('./blogClassify');
+const profile = require('./profile');
 
 // 在routers中局部注册中间件
 module.exports = (app) => {
@@ -15,4 +16,5 @@ module.exports = (app) => {
   app.use(character.routes());
   app.use(log.routes());
   app.use(blogClassify.routes());
+  app.use(profile.routes());
 }

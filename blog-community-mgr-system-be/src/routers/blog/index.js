@@ -18,6 +18,7 @@ router.post('/add',async (ctx) =>{
     author,
     publishDate,
     classfiy,
+    content,
   } = getRequestBody(ctx);
 
   // 实例化请求体传过来的数据
@@ -26,6 +27,7 @@ router.post('/add',async (ctx) =>{
     author,
     publishDate,
     classfiy,
+    content,
   });
 
   // 插入新数据到数据库中
@@ -106,6 +108,7 @@ router.post('/update',async (ctx) => {
     // author,
     // publishDate, 
     // classfiy,
+    // content,
     ...others
   } = getRequestBody(ctx);
 

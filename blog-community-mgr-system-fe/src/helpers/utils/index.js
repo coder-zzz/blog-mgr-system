@@ -1,4 +1,21 @@
 import { message } from "ant-design-vue"
+import store from "../../store";
+
+    // 判断用户角色
+export const isAction = (columns) => {
+  const uc = store.state.userCharacter.name;
+
+  if(uc === 'superAdmin'){
+    columns.push(
+    {
+      title:'操作',
+      slots:{
+        customRender:'actions',
+      },
+    }
+    )
+  }
+}
 
 // promise的封装
 export const result = (response,authShowErrorMsg = true) => {

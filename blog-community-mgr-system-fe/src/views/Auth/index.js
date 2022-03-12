@@ -55,7 +55,10 @@ export default defineComponent({
       const res = await auth.register(regForm.account,regForm.password,regForm.inviteCode);
 
       result(res)
-      .success((data) => {
+      .success(async (data) => {
+        console.log(data);
+        console.log(store.state.characterInfo[0]._id);
+        const userInfo = await user.editCharacter(store.state.characterInfo[0]._id,data.data._id);
         message.success(data.msg);
       })
     }

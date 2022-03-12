@@ -83,7 +83,7 @@ router.post('/register',async (ctx) =>{
   // 返回请求数据
   ctx.body = {
     code:1,
-    msg:"注册成功",
+    msg:"注册成功 请去登录",
     data:res,
   };
 })

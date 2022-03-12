@@ -1,13 +1,13 @@
 <template>
   <div>
     <a-card title="邀请码列表">
-      <div>
+      <div v-only-superAdmin>
         <a-input-number v-model:value="count" :min="1" :max="20" />
         &nbsp;
         <a-button type="primary" @click="add(count)">添加邀请码</a-button>
       </div>
 
-      <a-divider></a-divider>
+      <a-divider v-only-superAdmin></a-divider>
 
       <div>
         <a-table

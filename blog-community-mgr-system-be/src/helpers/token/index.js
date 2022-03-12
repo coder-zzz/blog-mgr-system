@@ -28,7 +28,7 @@ const middleware = (app) => {
   app.use(koajwt({
     secret:config.JWT_SECRET,
   }).unless({
-    // 登录注册接口不需要验证token
+    // 登录注册页面接口不需要验证token，所以忽略
     path:[
       /^\/auth\/login/,
       /^\/auth\/register/,
@@ -57,5 +57,5 @@ module.exports = {
   getToken,
   verify,
   middleware,
-  catchTokenError
+  catchTokenError,
 }

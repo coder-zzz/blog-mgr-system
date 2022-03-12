@@ -5,9 +5,13 @@ import { result,formatTimeStamp} from "../../helpers/utils";
 import { message } from "ant-design-vue";
 import Update from '@/views/Blogs/Update/index.vue'
 
+import { mavonEditor } from "mavon-editor";
+import "mavon-editor/dist/css/index.css";
+
 export default defineComponent({
   components:{
     Update,
+    mavonEditor
   },
   setup(){
     const route = useRoute();
@@ -16,6 +20,11 @@ export default defineComponent({
     const {id} = route.params;
     const detailInfo = ref({});
     const showUpdateModal = ref(false);
+    const subfield = ref(false);
+    const defaultOpen = ref('preview');
+    const toolbarsFlag = ref(false);
+    const editable = ref(false);
+
 
     const getDetail = async () => {
       const res = await blog.detail(id);
@@ -23,7 +32,7 @@ export default defineComponent({
       result(res)
         .success(({data}) => {
           detailInfo.value = data;
-          // detailInfo.value.publishDate = formatTimeStamp(detailInfo.value.publishDate);
+          console.log(detailInfo.value.content);
         })
     }
 
@@ -46,6 +55,27 @@ export default defineComponent({
       Object.assign(detailInfo.value,newData);
     }
 
+    // 显示编辑框
+    const editContent = () => {
+       subfield.value = true;
+       defaultOpen.value = 'edit';
+       toolbarsFlag.value = true;
+       editable.value = true;
+    }
+
+      // 保存博客修改后的内容
+    const save = async () => {
+      const res = await blog.update({
+        id,
+        content:detailInfo.value.content,
+      });
+
+      result(res)
+      .success(({msg}) => {
+        message.success(msg);
+      })
+    }
+
     onMounted(() => {
       getDetail();
     })
@@ -56,6 +86,12 @@ export default defineComponent({
       remove,
       showUpdateModal,
       update,
+      subfield,
+      defaultOpen,
+      toolbarsFlag,
+      editable,
+      editContent,
+      save,
     }
   }
 })

@@ -1,5 +1,12 @@
 import store from '@/store';
 
+export const isSuperAdmin = () => {
+  const uc = store.state.userCharacter;
+
+  return uc.name === "superAdmin";
+
+}
+
 export const getCharacterInfoById = (id) => {
   const {characterInfo} = store.state;
 

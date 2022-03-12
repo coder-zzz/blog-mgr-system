@@ -7,7 +7,7 @@ export default defineComponent({
     const router = useRouter();
     const route = useRoute();
 
-    const openKeys = ref([]);
+    const openKeys = ref(['杂项']);
     const selectedKeys = ref([]);
 
     onMounted(() => {
@@ -15,6 +15,22 @@ export default defineComponent({
     })
 
     const to = (url) => {
+      menu.forEach((item) => {
+        let childrenUrl = [];
+
+        if(item.children){
+          item.children.forEach((childrenItem) => {
+            childrenUrl.push(childrenItem.url);
+          })
+
+          if(childrenUrl.indexOf(url) === -1){
+            openKeys.value = [];
+          }else{
+            openKeys.value = [item.title];
+          }
+        }
+      })
+
       router.push(url);
     }
 
