@@ -116,12 +116,14 @@ export default defineComponent({
       getUser();
     }
 
+    // 编辑
     const onEdit = (record) => {
       editForm.current = record;
       editForm.character = record.character;
       showEditCharacterModal.value = true;
     }
 
+    // 修改用户角色
     const updateCharacter = async () => {
       const res = await user.editCharacter(editForm.character,editForm.current._id);
 

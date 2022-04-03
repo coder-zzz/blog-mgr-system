@@ -15,10 +15,10 @@ connect().then(() => {
     app.use(cors());
 
     // 捕获token错误
-    app.use(catchTokenError);
+    // app.use(catchTokenError);
     
     // jwt验证中间件
-    koaJwtMiddleware(app);
+    // koaJwtMiddleware(app);
 
     // 日志中间件
     app.use(logMiddleware);

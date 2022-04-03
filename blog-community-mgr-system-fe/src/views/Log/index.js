@@ -4,22 +4,22 @@ import {result,formatTimeStamp,isAction} from '@/helpers/utils';
 import { getLogInfoByPath } from "../../helpers/log";
 import {message} from 'ant-design-vue'
 
-const columns = [
-  {
-    title:'用户名',
-    dataIndex:'user.account',
-  },
-  {
-    title:'动作',
-    dataIndex:'action',
-  },
-  {
-    title:'记录时间',
-    slots:{
-      customRender:'createdAt',
-    },
-  },
-];
+// const columns = [
+//   {
+//     title:'用户名',
+//     dataIndex:'user.account',
+//   },
+//   {
+//     title:'动作',
+//     dataIndex:'action',
+//   },
+//   {
+//     title:'记录时间',
+//     slots:{
+//       customRender:'createdAt',
+//     },
+//   },
+// ];
 
 export default defineComponent({
   setup(){

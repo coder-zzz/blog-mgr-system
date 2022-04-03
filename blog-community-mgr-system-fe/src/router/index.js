@@ -68,9 +68,9 @@ router.beforeEach(async (to,from,next) => {
     await store.dispatch('getCharacterInfo');
   }
 
-  if(!store.state.userInfo.account){
-    await store.dispatch('getUserInfo');
-  }
+  // if(!store.state.userInfo.account){
+  //   await store.dispatch('getUserInfo');
+  // }
 
     await store.dispatch('getBlogClassify');
 
